@@ -1,6 +1,7 @@
 package com.chy.smdc.dao;
 
 import com.chy.smdc.bean.ProductCategory;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.swing.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
@@ -20,9 +24,7 @@ public class ProductCategoryDaoTest {
 
     @Test
     public void findone(){
-        ProductCategory one = productCategory.findOne(1);
-        one.setCategoryType(4);
-        productCategory.save(one);
+        System.out.println(productCategory.findAll().toString());
     }
 
 
@@ -34,6 +36,14 @@ public class ProductCategoryDaoTest {
         this.productCategory.save(productCategory);
     }
 
+
+
+    @Test
+    public void findByCategoryTypeInTest(){
+        List<Integer> list = Arrays.asList(1, 3, 4, 5);
+        List<ProductCategory> byCategoryTypeIn = productCategory.findByCategoryTypeIn(list);
+        Assert.assertNotEquals(0,byCategoryTypeIn.size());
+    }
 
 
 
