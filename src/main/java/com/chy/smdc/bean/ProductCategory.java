@@ -20,17 +20,15 @@ public class ProductCategory {
     private int categoryId;
     private String categoryName;
     private int categoryType;
-    private Date createTime;
-    private Date updateTime;
+
 
     public ProductCategory() {
     }
 
-    public ProductCategory(String categoryName, int categoryType, Date createTime, Date updateTime) {
+
+    public ProductCategory(String categoryName, int categoryType) {
         this.categoryName = categoryName;
         this.categoryType = categoryType;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
     }
 
     @Override
@@ -39,8 +37,6 @@ public class ProductCategory {
                 "categoryId=" + categoryId +
                 ", categoryName='" + categoryName + '\'' +
                 ", categoryType=" + categoryType +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
                 '}';
     }
 }
