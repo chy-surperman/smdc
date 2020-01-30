@@ -16,6 +16,9 @@ public class Logclass {
     private final Logger logger = LoggerFactory.getLogger(Logclass.class);
 
 
+
+
+
     @Test
     public void test1() {
         logger.debug("sssss");
