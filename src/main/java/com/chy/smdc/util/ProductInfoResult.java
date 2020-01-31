@@ -3,6 +3,8 @@ package com.chy.smdc.util;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 public class ProductInfoResult {
     @JsonProperty("id")
@@ -10,7 +12,7 @@ public class ProductInfoResult {
     @JsonProperty("name")
     private  String productName;
     @JsonProperty("price")
-    private  String productPrice;
+    private BigDecimal productPrice;
     @JsonProperty("description")
     private  String productDescription;
     @JsonProperty("icon")
