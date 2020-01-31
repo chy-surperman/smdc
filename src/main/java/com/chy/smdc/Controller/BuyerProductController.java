@@ -52,9 +52,9 @@ public class BuyerProductController {
                     BeanUtils.copyProperties(productInfolist,productInfoResult);
                     productInfoResults.add(productInfoResult);
                 }
-                productResult.setProductInfoResultList(productInfoResults);
-                productResults.add(productResult);
             }
+            productResult.setProductInfoResultList(productInfoResults);
+            productResults.add(productResult);
         }
         Result result = new Result();
         result.setData(productResults);

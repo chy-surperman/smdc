@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.*;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductInfoDaoTest {
@@ -19,23 +20,22 @@ public class ProductInfoDaoTest {
     ProductInfoDao productInfoDao;
 
     @Test
-    public void findByProductStatusTest(){
-     productInfoDao.findByProductStatus(0);
+    public void findByProductStatusTest() {
+        productInfoDao.findByProductStatus(0);
     }
 
 
     @Test
-    public void saveTes(){
+    public void insertone() {
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductName("皮蛋");
-        productInfo.setProductPrice(new BigDecimal(3.2));
+        productInfo.setProductName("龙虾");
+        productInfo.setProductPrice(new BigDecimal(100.2));
         productInfo.setProductStatus(0);
         productInfo.setProductStore(100);
         productInfo.setProductDescription("特别好吃");
-        productInfo.setCategoryType(1);
+        productInfo.setCategoryType(2);
         productInfo.setProductIcon("http://xxx.png");
-        productInfo.setProductId("1");
-        ProductInfo save = productInfoDao.save(productInfo);
-        Assert.assertNotNull(save);
+        productInfo.setProductId("3");
+        this.productInfoDao.save(productInfo);
     }
 }

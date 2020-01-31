@@ -44,15 +44,29 @@ public class ProductInfoServiceImplTest {
     @Test
     public void save() {
         ProductInfo productInfo = new ProductInfo();
-        productInfo.setProductName("皮蛋");
-        productInfo.setProductPrice(new BigDecimal(3.2));
+        productInfo.setProductName("龙虾粥");
+        productInfo.setProductPrice(new BigDecimal(20.0));
         productInfo.setProductStatus(0);
         productInfo.setProductStore(100);
         productInfo.setProductDescription("特别好吃");
-        productInfo.setCategoryType(1);
+        productInfo.setCategoryType(2);
         productInfo.setProductIcon("http://xxx.png");
         productInfo.setProductId("1");
-        ProductInfo save = productInfoService.save(productInfo);
-        Assert.assertNotNull(save);
+        productInfoService.save(productInfo);
+    }
+
+
+    @Test
+    public void insertone(){
+        ProductInfo productInfo = new ProductInfo();
+        productInfo.setProductName("龙虾粥");
+        productInfo.setProductPrice(new BigDecimal(20.0));
+        productInfo.setProductStatus(0);
+        productInfo.setProductStore(100);
+        productInfo.setProductDescription("特别好吃");
+        productInfo.setCategoryType(2);
+        productInfo.setProductIcon("http://xxx.png");
+        productInfo.setProductId("1");
+        productInfoService.save(productInfo);
     }
 }

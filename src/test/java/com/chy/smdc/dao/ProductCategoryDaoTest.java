@@ -31,8 +31,8 @@ public class ProductCategoryDaoTest {
     @Test
     public void insertone(){
         ProductCategory productCategory = new ProductCategory();
-        productCategory.setCategoryName("小清新");
-        productCategory.setCategoryType(1);
+        productCategory.setCategoryName("小可爱");
+        productCategory.setCategoryType(3);
         this.productCategory.save(productCategory);
     }
 
