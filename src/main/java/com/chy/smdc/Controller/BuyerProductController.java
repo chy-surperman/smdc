@@ -8,6 +8,7 @@ import com.chy.smdc.service.impl.ProductInfoServiceImpl;
 import com.chy.smdc.util.ProductInfoResult;
 import com.chy.smdc.util.ProductResult;
 import com.chy.smdc.util.Result;
+import com.chy.smdc.util.messageResult;
 import lombok.Getter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/buyer/product")
 public class BuyerProductController {
+
 
     @Autowired
     ProductInfoService productInfoService;
@@ -56,10 +58,6 @@ public class BuyerProductController {
             productResult.setProductInfoResultList(productInfoResults);
             productResults.add(productResult);
         }
-        Result result = new Result();
-        result.setData(productResults);
-        result.setCode(0);
-        result.setMsg("成功！！");
-        return result;
+        return messageResult.success(productResults);
     }
 }
