@@ -17,5 +17,16 @@ public class ProductInfoResult {
     private  String productDescription;
     @JsonProperty("icon")
     private  String productIcon;
+    @JsonProperty("sellCount")
+    private Integer productSellcount;
+    @JsonProperty("oldPrice")
+    private BigDecimal productOldprice;
+    @JsonProperty("rating")
+    private Integer productRating;
+    @JsonProperty("info")
+    private String productInformation;
+    @JsonProperty("image")
+    private String productImage;
+
 
 }

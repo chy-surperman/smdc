@@ -14,15 +14,18 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/buyer/product")
+@RequestMapping(value = "/buyer/product",method = RequestMethod.GET)
 public class BuyerProductController {
 
 
@@ -33,8 +36,8 @@ public class BuyerProductController {
     ProductCategoryService productCategoryService;
     
     @GetMapping("/list")
-    public Result list() {
-
+    public Result list(HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
 //        1.查找上架的商品
         List<ProductInfo> productInfoList = productInfoService.findUpAll();
 //        2.查找类目的方法
