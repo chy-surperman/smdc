@@ -19,6 +19,7 @@ public class SellerInfoServiceImplTest {
     @Autowired
     SellerInfoService sellerInfoService;
 
+
     @Test
     public void findOne() {
         SellerInfo one = sellerInfoService.findOne(1);
