@@ -25,7 +25,6 @@ public class SellerInfoController {
     @Autowired
     SellerPreferentialServiceImpl sellerPreferentialService;
 
-
     @Autowired
     SellerInfoServiceImpl sellerInfoService;
     @GetMapping("/list")
