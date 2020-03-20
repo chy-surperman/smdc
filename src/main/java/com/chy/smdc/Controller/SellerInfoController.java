@@ -46,8 +46,7 @@ public class SellerInfoController {
         sellerInfoResult.setSellerBulletin(one.getSellerBulletin());
         sellerInfoResult.setSellerAvatar(one.getSellerAvatar());
         sellerInfoResult.setSellerPreferentialResultList(list);
+        sellerInfoResult.setSellerMinprice(one.getSellerMinprice());
         return messageResult.success(sellerInfoResult);
     }
-
-
 }

@@ -5,6 +5,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -18,4 +19,5 @@ public class SellerInfo {
     private String  sellerDescription;
     private String  sellerBulletin;
     private String  sellerAvatar;
+    private BigDecimal sellerMinprice;
 }
