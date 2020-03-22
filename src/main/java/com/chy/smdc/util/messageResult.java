@@ -1,7 +1,7 @@
 package com.chy.smdc.util;
 
 public class messageResult {
-    public static  Result success(Object object){
+    public static Result success(Object object){
         Result result = new Result();
         result.setCode(200);
         result.setMsg("请求成功");
