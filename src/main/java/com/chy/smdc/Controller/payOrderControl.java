@@ -57,7 +57,6 @@ public class payOrderControl {
     @Value("${application.signtype}")
     public static String signtype ;
 
-
     @GetMapping("/pay")
     public Result payOrderMeth(String price, String place, String name, String iphone, HttpServletResponse response) throws AlipayApiException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
