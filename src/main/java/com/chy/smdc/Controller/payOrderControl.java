@@ -62,7 +62,7 @@ public class payOrderControl {
     public Result payOrderMeth(String price, String place, String name, String iphone, HttpServletResponse response) throws AlipayApiException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
         System.out.println(place + "共计花费" + price + "-" + name + "-" + iphone);
-        AlipayClient client = new DefaultAlipayClient(url,appid, privatekey, format, charset, publickey, signtype);
+        AlipayClient client = new DefaultAlipayClient(url,appid, privatekey, format, charset, publickey, "RSA2");
         AlipayTradeWapPayRequest alipay_request=new AlipayTradeWapPayRequest();
         // 封装请求支付信息
         AlipayTradeWapPayModel model=new AlipayTradeWapPayModel();
