@@ -23,5 +23,4 @@
         <appender-ref ref="consolelog"></appender-ref>
         <appender-ref ref="fileerrorLog"></appender-ref>
     </root>
-
 </configuration>
