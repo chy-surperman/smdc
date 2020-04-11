@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface SellerPreferentialDao extends JpaRepository<SellerPreferential,Integer> {
+
     List<SellerPreferential>  findBySellerId(int id);
 }

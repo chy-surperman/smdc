@@ -18,7 +18,7 @@ public class Logclass {
     @Test
     public void test1() {
         log.debug("sssss");
-        log.info("jkdhjsla");
+        log.info("chy");
         log.error("sdhsjkdksdsalkd");
     }
 }
