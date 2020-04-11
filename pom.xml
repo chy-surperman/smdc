@@ -161,6 +161,8 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.*</include>
+                    <!--加载静态文件-->
+                    <include>/static/</include>
                 </includes>
                 <filtering>false</filtering>
             </resource>
