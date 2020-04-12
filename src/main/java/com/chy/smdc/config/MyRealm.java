@@ -28,7 +28,7 @@ public class MyRealm extends AuthorizingRealm {
         Subject subject = SecurityUtils.getSubject();
         user user = (com.chy.smdc.bean.user) subject.getPrincipal();
         System.out.println(user.getPassword());
-        simpleAuthorizationInfo.addStringPermission("user:update");
+        simpleAuthorizationInfo.addStringPermission("user:add");
         return simpleAuthorizationInfo;
     }
 
