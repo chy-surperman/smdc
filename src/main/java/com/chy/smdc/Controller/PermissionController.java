@@ -17,6 +17,7 @@ public class PermissionController {
     @Autowired
     PermissionServiceImpl permissionServiceimpl;
 
+
     @RequestMapping("/getMenu")
     @ResponseBody
     public List<Permission> getMenu() {
