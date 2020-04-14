@@ -11,8 +11,7 @@ import javax.persistence.Id;
 @DynamicUpdate
 public class SellerPreferential {
     @Id
-     private  Integer sellerPreferentialtype;
-
+    private  Integer sellerPreferentialtype;
     private String sellerPreferentialdescription;
     private int sellerId;
 

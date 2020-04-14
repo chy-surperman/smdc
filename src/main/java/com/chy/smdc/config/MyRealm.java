@@ -1,6 +1,7 @@
 package com.chy.smdc.config;
 
-import com.chy.smdc.bean.user;
+import com.chy.smdc.bean.User;
+import com.chy.smdc.service.impl.UserServiceImpl;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
@@ -13,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MyRealm extends AuthorizingRealm {
 
     @Autowired
-    com.chy.smdc.service.impl.userServiceimpl userServiceimpl;
+    UserServiceImpl UserServiceimpl;
 
     /**
      * 授权
@@ -26,7 +27,7 @@ public class MyRealm extends AuthorizingRealm {
 
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         Subject subject = SecurityUtils.getSubject();
-        user user = (com.chy.smdc.bean.user) subject.getPrincipal();
+        User user = (User) subject.getPrincipal();
         System.out.println(user.getPassword());
         simpleAuthorizationInfo.addStringPermission("user:add");
         return simpleAuthorizationInfo;
@@ -45,11 +46,11 @@ public class MyRealm extends AuthorizingRealm {
         System.out.println(authenticationToken1.getUsername());
 
 
-        user user = userServiceimpl.selectByuserName(authenticationToken1.getUsername());
-        System.out.println(user);
-        if (user == null){
+        User userByUsername = UserServiceimpl.getUserByUsername(authenticationToken1.getUsername());
+        System.out.println(userByUsername);
+        if (userByUsername == null){
             return  null;
         }
-        return new SimpleAuthenticationInfo(user,user.getPassword(),"");
+        return new SimpleAuthenticationInfo(userByUsername,userByUsername.getPassword(),"");
     }
 }
