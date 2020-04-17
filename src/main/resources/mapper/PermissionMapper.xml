@@ -22,9 +22,14 @@
     -->
     id, pid, name, permcode, type, sort, url, description
   </sql>
+  <select id="queryAll" resultType="Permission">
+    select
+    <include refid="Base_Column_List"/>
+    from permission
+  </select>
   <select id="getAllMenu" resultType="Permission">
         select
-        id, pid, name
+       <include refid="Base_Column_List" />
         from permission
         where type= 1
     </select>

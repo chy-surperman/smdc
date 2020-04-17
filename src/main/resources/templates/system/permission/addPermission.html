@@ -1,0 +1,105 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/layui/css/layui.css}">
+</head>
+<body>
+<div style="margin-top: 20px;display: inline-block;text-align: center;">
+    <form class="layui-form" method="post" action="/system/savePermission">
+        <div class="layui-form-item">
+            <label class="layui-form-label">上级菜单（若为菜单）：</label>
+            <div class="layui-input-block">
+                <input type="text" name="pid" id="tree" lay-filter="tree" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单（权限）名称：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" required="required" placeholder="请输入密码" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限编码：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="permcode" required="required" placeholder="请输入真实姓名" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单url：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="url" required="required" placeholder="请输入邮箱" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="sort" required="required" placeholder="请输入地址" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型：</label>
+            <div class="layui-input-block">
+                <select name="type" lay-verify="required">
+                    <option value="1" selected>菜单</option>
+                    <option value="0">权限</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">描述：</label>
+            <div class="layui-input-inline">
+                <input type="text" name="description" required="required" placeholder="请输入手机号码" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div><input type="submit" value="保存" style="margin: auto;"class="layui-btn layui-btn-normal"/></div>
+    </form>
+
+
+</div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    layui.config({
+        base: '../../../'
+    }).extend({
+        treeSelect:'/treeSelect/treeSelect'
+    }).use(['form', 'treeSelect', 'jquery'], function () {
+        debugger;
+        var form = layui.form;
+        var $ = layui.jquery;
+        var treeSelect = layui.treeSelect;
+        treeSelect.render({
+            elem: '#tree',
+            data:'/system/getAllMenu',
+            type: 'get',
+            placeholder: '如果不选择，默认为最顶级菜单',
+            search: true,
+            // 点击回调
+            click: function(d){
+                console.log(d.current.id);
+                var pid = d.current.id;
+                $("#tree").val(pid);
+            },
+            style: {
+                folder: {
+                    enable: true
+                },
+                line: {
+                    enable: true
+                }
+            },
+            // 加载完成后的回调函数
+            success: function (d) {
+
+            }
+        });
+    });
+</script>
+</body>
+</html>

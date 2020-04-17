@@ -3,6 +3,8 @@ package com.chy.smdc.dao;
 import com.chy.smdc.bean.Role;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface RoleMapper {
     /**
@@ -52,4 +54,7 @@ public interface RoleMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(Role record);
+
+
+    List<Role> selectAllRole();
 }

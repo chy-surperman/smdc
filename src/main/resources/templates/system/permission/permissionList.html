@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/static/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/static/treeTable/treeTable.css}">
+</head>
+<body>
+<div class="layui-layout layui-layout-admin">
+    <hr class="layui-bg-green">
+    <button class="layui-btn" onclick="addPermission()"><i class="layui-icon">&#xe608;</i>添加</button>
+    <button class="layui-btn"><i class="layui-icon">&#xe642;</i>修改</button>
+    <button class="layui-btn" onclick="deletePermission()"><i class="layui-icon">&#xe640;</i>删除</button>
+    <button class="layui-btn" onclick="searchData()"><i class="layui-icon">&#xe615;</i>查询</button>
+
+    <table id="table" lay-filter="table"></t    able>
+</div>
+<script th:src="@{/static/layui.js}"></script>
+<script th:src="@{/static/lay/modules/jquery.js}"></script>
+<script type="text/javascript" th:inline="javascript">
+    layui.config({
+        base: '../../../'
+    }).extend({
+        treeTable: '/smdc/static/treeTable/treeTable'
+    }).use(['treeTable','element','jquery'], function () {
+        var tree = layui.treeTable;
+        var $ = layui.jquery;
+        tree.render({
+            id: 'permissionTable',
+            text: {
+                none: '<div style="padding: 18px 0;">哎呀，一条数据都没有~</div>'
+            },
+            elem: '#table',
+            tree: {
+                iconIndex: 1,  // 折叠图标显示在第几列
+                isPidData: true  // 是否是pid形式数据
+            },
+            cols: [
+                {type: 'radio', fixed: 'left'},
+                {field: 'id', title: 'ID'},
+                {field: 'name', title: '权限（菜单）名称'},
+                {field: 'permcode', title: '权限编码'},
+                {field: 'url', title: '权限菜单'},
+                {field: 'type', title: '类型', templet: function (d) {
+                        return d.title = 1 ? '菜单' : '按钮';
+                    }},
+                {field: 'sort', title: '排序'},
+                {field: 'description', title: '描述'}
+            ],
+            reqData: function(data, callback) {
+                // 在这里写ajax请求，通过callback方法回调数据
+                $.get('/smdc/system/getPermission', function (res) {
+                    callback(res);  // 参数是数组类型
+                });
+            }
+        });
+        //查询
+        window.searchData = function () {
+            tree.reload('permissionTable');
+        };
+
+        window.addPermission = function () {
+            layer.open({
+                type: 2,
+                area : ['550px', '600px'],
+                title: '添加权限',
+                content: 'toAddPermission' //这里content是一个URL，
+            });
+        };
+
+    });
+</script>
+</body>
+</html>

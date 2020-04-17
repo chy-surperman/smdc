@@ -105,7 +105,12 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.alipay.sdk</groupId>-->
+            <!--<artifactId>alipay-sdk-java</artifactId>-->
+            <!--<version>3.3.4.ALL</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>
