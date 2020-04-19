@@ -29,7 +29,6 @@ public class OrderMasterDaoTest {
         orderMaster.setPayStatus(1);
         orderMaster.setBuyerName("陈海荣");
         orderMaster.setBuyerAddress("长沙");
-        orderMaster.setBuyerOpenid("123456");
         orderMaster.setBuyerPhone("12345678910");
         orderMaster.setOrderAmount(new BigDecimal(10.0));
         orderMaster.setCreateTime(new Date());
@@ -41,7 +40,7 @@ public class OrderMasterDaoTest {
     @Test
     public void findByBuyerOpenid(){
         PageRequest pageRequest = new PageRequest(0,1);
-        Page<OrderMaster> byBuyerOpenid = orderMasterDao.findByBuyerOpenid("123456", pageRequest);
-        Assert.assertNotNull(byBuyerOpenid);
+        Page<OrderMaster> ByBuyerPhone = orderMasterDao.findByBuyerPhone("12345678910", pageRequest);
+        Assert.assertNotNull(ByBuyerPhone);
     }
 }

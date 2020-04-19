@@ -1,9 +1,12 @@
 package com.chy.smdc.Controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradeWapPayModel;
+import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradeWapPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.alipay.api.response.AlipayTradeWapPayResponse;
@@ -16,12 +19,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/buyer/orderpay")
@@ -49,13 +51,14 @@ public class payOrderControl {
     public  String format ;
     // 支付宝公钥
     @Value("${application.publickey}")
-    private String publickey ;
+    private String  publickey;
     // 日志记录目录
     @Value("${application.log_path}")
     private String logpath ;
     // RSA2
     @Value("${application.sign_type}")
     public  String sign_type ;
+
 
     @Value("${application.timeout_express}")
     public  String timeout_express ;
@@ -67,10 +70,11 @@ public class payOrderControl {
     payOrderServiceImpl payOrderService;
 
     @GetMapping("/pay")
-    public Result payOrderMeth(String price, String place, @RequestParam(value="selectFoods[]") String[] selectFoods, String name, String iphone, HttpServletResponse response) throws AlipayApiException, IOException {
+    public Result payOrderMeth(String price, String place, @RequestParam(value="selectFoods") String[] selectFoods, String name, String iphone, HttpServletResponse response) throws AlipayApiException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
-        for (String i: selectFoods ) {
-            System.out.println(i.toString());
+        for (String selectfoods:selectFoods) {
+            JSONObject jsonObject = JSONObject.parseObject(selectfoods);
+            System.out.println(jsonObject.toJSONString());
         }
         AlipayClient client = new DefaultAlipayClient(url,appid,privatekey,format,charset,publickey,sign_type);
         AlipayTradeWapPayRequest alipay_request=new AlipayTradeWapPayRequest();
@@ -79,17 +83,19 @@ public class payOrderControl {
         model.setBody("云店扫码自助点餐");
         model.setSubject("云店扫码支付");
         model.setOutTradeNo(payOrderService.OrderNum());
-        System.out.println(payOrderService.OrderNum());
-        System.out.println(payOrderService.OrderNum());
         model.setTimeoutExpress(timeout_express);
         model.setTotalAmount(price);
         model.setProductCode(product_code);
         alipay_request.setBizModel(model);
+        alipay_request.setReturnUrl(return_url);
+        alipay_request.setNotifyUrl(notify_url);
         // form表单生产
         String form = "";
         try {
             // 调用SDK生成表单
             form = client.pageExecute(alipay_request).getBody();
+            AlipayTradeWapPayResponse alipayTradeWapPayResponse = client.pageExecute(alipay_request);
+            System.out.println(alipayTradeWapPayResponse.getBody());
         } catch (AlipayApiException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -98,4 +104,26 @@ public class payOrderControl {
         map.put("payUrl",form);
       return messageResult.success(map);
     }
+
+   @RequestMapping("/return_url")
+    public void Notify_url(HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException, AlipayApiException {
+       //获取支付宝GET过来反馈信息
+       Map<String,String> params = new HashMap<String,String>();
+       Map<String,String[]> requestParams = request.getParameterMap();
+       for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
+           String name = (String) iter.next();
+           String[] values = (String[]) requestParams.get(name);
+           String valueStr = "";
+           for (int i = 0; i < values.length; i++) {
+               valueStr = (i == values.length - 1) ? valueStr + values[i]
+                       : valueStr + values[i] + ",";
+           }
+           //乱码解决，这段代码在出现乱码时使用
+           valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+           params.put(name, valueStr);
+       }
+
+       boolean signVerified = AlipaySignature.rsaCheckV1(params, publickey, charset, sign_type); //调用SDK验证签名
+       System.out.println(signVerified);
+   }
 }
