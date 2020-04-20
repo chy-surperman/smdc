@@ -71,7 +71,7 @@ public class payOrderControl {
     public String product_code;
 
     @Autowired
-    payOrderServiceImpl payOrderService;
+    payOrderServiceImpl payOrderServiceImpl;
 
     @Autowired
     OrderServiceImpl OrderServiceImpl;
@@ -80,7 +80,7 @@ public class payOrderControl {
         response.setHeader("Access-Control-Allow-Origin", "*");
         AlipayClient client = new DefaultAlipayClient(url, appid, privatekey, format, charset, publickey, sign_type);
         AlipayTradeWapPayRequest alipay_request = new AlipayTradeWapPayRequest();
-        String outtrade = payOrderService.OrderNum();
+        String outtrade = payOrderServiceImpl.OrderNum();
         // 封装请求支付信息
         AlipayTradeWapPayModel model = new AlipayTradeWapPayModel();
         model.setBody("云店扫码自助点餐");
@@ -94,7 +94,7 @@ public class payOrderControl {
         alipay_request.setNotifyUrl(notify_url);
         List<OrderDetailDTO> orderDetailDTOS = JSONObject.parseArray(selectFoods, OrderDetailDTO.class);
         //创建订单详情
-        payOrderService.saveOrderDetailData(orderDetailDTOS,outtrade);
+        payOrderServiceImpl.saveOrderDetailData(orderDetailDTOS,outtrade);
         //创建订单
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setOrderId(outtrade);
