@@ -13,6 +13,7 @@ import com.alipay.api.response.AlipayTradeWapPayResponse;
 import com.chy.smdc.DTO.OrderDTO;
 import com.chy.smdc.DTO.OrderDetailDTO;
 import com.chy.smdc.bean.alipay;
+import com.chy.smdc.dao.OrderMasterDao;
 import com.chy.smdc.service.impl.OrderServiceImpl;
 import com.chy.smdc.service.impl.payOrderServiceImpl;
 import com.chy.smdc.util.Result;
@@ -75,6 +76,10 @@ public class payOrderControl {
 
     @Autowired
     OrderServiceImpl OrderServiceImpl;
+
+    @Autowired
+    OrderMasterDao orderMasterDao;
+
     @GetMapping("/pay")
     public Result payOrderMeth(String price, String place, String selectFoods, String name, String iphone, HttpServletResponse response) throws AlipayApiException, IOException {
         response.setHeader("Access-Control-Allow-Origin", "*");
@@ -137,6 +142,9 @@ public class payOrderControl {
         }
 
         boolean signVerified = AlipaySignature.rsaCheckV1(params, publickey, charset, sign_type); //调用SDK验证签名
-        System.out.println(signVerified);
+        if (signVerified){
+           orderMasterDao.updatepaystatus(params.get("out_trade_no"));
+            System.out.println("完成插入");
+        }
     }
 }
