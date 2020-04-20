@@ -16,6 +16,7 @@ public class payOrderServiceImpl implements payOrderService {
     @Autowired
     OrderDetailDao orderDetailDao;
 
+
     @Override
     public String OrderNum() {
         SimpleDateFormat time = new SimpleDateFormat("yyyyMMddHHmmss");
