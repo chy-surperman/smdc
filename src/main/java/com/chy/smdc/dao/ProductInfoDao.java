@@ -1,6 +1,7 @@
 package com.chy.smdc.dao;
 
 import com.chy.smdc.bean.ProductInfo;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

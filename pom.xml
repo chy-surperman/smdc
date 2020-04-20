@@ -104,17 +104,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.11</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-
-        <!--&lt;!&ndash; https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.alipay.sdk</groupId>-->
-            <!--<artifactId>alipay-sdk-java</artifactId>-->
-            <!--<version>3.3.4.ALL</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>com.alipay.sdk</groupId>
             <artifactId>alipay-sdk-java</artifactId>
@@ -177,5 +171,4 @@
             </resource>
         </resources>
     </build>
-
 </project>

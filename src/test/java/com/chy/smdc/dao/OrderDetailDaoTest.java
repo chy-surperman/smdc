@@ -22,13 +22,11 @@ public class OrderDetailDaoTest {
    @Test
     public void insertone(){
        OrderDetail orderDetail = new OrderDetail();
-       orderDetail.setDetailId("123456");
        orderDetail.setOrderId("123456");
        orderDetail.setProductIcon("http://xxxx.png");
        orderDetail.setProductId("123");
        orderDetail.setProductName("龙虾");
        orderDetail.setProductPrice(new BigDecimal(10.2));
-       orderDetail.setProductQuantity(2);
        orderDetailDao.save(orderDetail);
    }
 

@@ -25,9 +25,6 @@ public class OrderDTO {
     /** 买家地址. */
     private String buyerAddress;
 
-    /** 买家微信Openid. */
-    private String buyerOpenid;
-
     /** 订单总金额. */
     private BigDecimal orderAmount;
 
