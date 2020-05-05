@@ -16,4 +16,13 @@ public class messageResult {
         result.setData(object);
         return result;
     }
+
+    public static Result houtaisuccess(Object object){
+        Result result = new Result();
+        result.setCode(0);
+        result.setMsg("请求成功");
+        result.setData(object);
+        return result;
+    }
+
 }
