@@ -124,7 +124,7 @@ public class payOrderControl {
     }
 
     @RequestMapping("/return_url")
-    public void Notify_url(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, AlipayApiException {
+    public String Notify_url(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException, AlipayApiException {
         //获取支付宝GET过来反馈信息
         Map<String, String> params = new HashMap<String, String>();
         Map<String, String[]> requestParams = request.getParameterMap();
@@ -146,5 +146,6 @@ public class payOrderControl {
            orderMasterDao.updatepaystatus(params.get("out_trade_no"));
             System.out.println("完成插入");
         }
+        return  "<script>alert(支付成功)</script>";
     }
 }
