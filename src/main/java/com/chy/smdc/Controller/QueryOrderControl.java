@@ -17,8 +17,9 @@ public class QueryOrderControl {
 
     @Autowired
     OrderDetailServiceImpl orderDetailService;
+
     @RequestMapping("/queryorder")
-    public String queryordertoindex() {
+    public String queryordertoIndex() {
         return "order/queryorder";
     }
 
@@ -27,5 +28,11 @@ public class QueryOrderControl {
     public Result queryorderdetail(){
         List<OrderDetail> all = orderDetailService.findAll();
         return messageResult.houtaisuccess(all);
+    }
+
+
+    @RequestMapping("/queryorderstatus")
+    public String queryordertoindex() {
+        return "order/queryOrderStatus";
     }
 }

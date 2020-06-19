@@ -22,7 +22,7 @@ public class shiroconfig  {
         Map<String, String> filterChainDefinitionMap=new LinkedHashMap<>();
         filterChainDefinitionMap.put("/user/add","perms[user:add]");
         filterChainDefinitionMap.put("/user/update","perms[user:update]");
-        filterChainDefinitionMap.put("/user/*","authc");
+        //filterChainDefinitionMap.put("/user/*","authc");
 
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         bean.setLoginUrl("/tologin");

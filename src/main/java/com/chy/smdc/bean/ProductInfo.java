@@ -1,17 +1,19 @@
 package com.chy.smdc.bean;
 
 import lombok.Data;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Data
 @DynamicUpdate
+@DynamicInsert
 public class ProductInfo {
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "product_id")
     @Id
     private String productId;
 
